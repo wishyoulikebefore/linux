@@ -1,0 +1,15 @@
+针对进程进行的操作
+
+监控某一进程:pidof
+
+当前shell进程的PID：$$
+
+上一个后台进程的PID：$! 
+myCommand && pid=$!
+myCommand & echo $! >/path/to/pid.file
+
+查看指定进程是否存在
+if ps -p $PID > /dev/null
+then
+   echo "$PID is running"
+fi
