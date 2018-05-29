@@ -1,0 +1,14 @@
+pigz是一个利用多核进行压缩的工具，他的压缩速度是gzip的5倍，同时cpu消耗也比gzip大，但他做的事情和gzip是一样的
+
+Usage: pigz [options] [files ...]
+
+-0 to -9, -11 : 压缩级别
+-p n : 指定压缩核心数，默认8个
+-k :压缩后保留原文件
+
+压缩文件
+pigz -6 -p 10 filename
+压缩后生成 filename.gz文件
+
+压缩目录
+tar cv filename | pigz -6 -p 10 > filename.tar.gz
