@@ -1,0 +1,15 @@
+#http://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/scp.html
+
+命令格式
+scp [参数] [原路径] [目标路径]
+
+参数
+-p 留原文件的修改时间，访问时间和访问权限。
+-q 不显示传输进度条。
+-r 递归复制整个目录
+
+从本地复制到远处
+scp -r local_folder remote_username@remote_ip:remote_folder
+
+从远处复制到本地
+scp -r remote_username@remote_ip:remote_folder local_folder
