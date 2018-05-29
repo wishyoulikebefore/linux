@@ -1,0 +1,25 @@
+#http://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/crontab.html
+
+crontab 命令，可以在固定的间隔时间执行指定的系统指令或 shell script脚本
+时间间隔的单位可以是分钟、小时、日、月、周及以上的任意组合
+这个命令非常适合周期性的日志分析或数据备份等工作
+
+命令格式
+crontab [-u user] file crontab [-u user] [ -e | -l | -r ]
+
+-u user：用来设定某个用户的crontab服务；
+file：file是命令文件的名字,表示将file做为crontab的任务列表文件并载入crontab
+-e：编辑某个用户的crontab文件内容。如果不指定用户，则表示编辑当前用户的crontab文件
+-l：显示某个用户的crontab文件内容，如果不指定用户，则表示显示当前用户的crontab文件内容
+-r：从/var/spool/cron目录中删除某个用户的crontab文件，如果不指定用户，则默认删除当前用户的crontab文件
+-i：在删除用户的crontab文件时给确认提示
+
+文件格式
+分 时 日 月 星期 要运行的命令
+#第1列分钟0～59
+#第2列小时0～23（0表示子夜）
+#第3列日1～31
+#第4列月1～12
+#第5列星期0～7（0和7表示星期天）
+#第6列要运行的命令
+
