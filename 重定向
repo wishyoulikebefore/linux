@@ -31,3 +31,111 @@ cut –c1-3 file
 打印前3个字符
 cut –c-3 file
 
+sort: 排序
+#选项
+-f：忽略大小写的差异
+-b：忽略最前面的空格符部分；
+-M：以月份的名字来排序
+-n：使用纯数字进行排序
+-r：反向排序；
+-u：就是 uniq ，相同的数据中，仅出现一行代表；
+-t：分隔符，预设是用 [tab] 键来分隔；
+-k：以哪个区间进行排序
+#示例
+对/etc/passwd,先以第六个域的第2个字符到第4个字符进行正向排序，再基于第一个域进行反向排序。
+cat /etc/passwd |  sort -t':' -k 6.2,6.4 -k 1r  
+
+uniq:排序完成后显示（需要先sort）
+#选项
+-i：忽略大小写字符的不同；
+-c：进行计数
+-u：只显示唯一的行
+
+grep：逐行分析讯息，输出包含所需信息的行
+egrep：等同于grep –E, 可使用正则（可匹配多个）
+#选项
+-a：将 binary 文件以 text 文件的方式搜寻数据
+-A num：输出匹配行后num行的内容
+-B num：输出匹配行前num行的内容
+-c：计算找到 '搜寻字符串' 的次数
+-i：忽略大小写
+-l:不输出匹配内容，只输出相关文件名
+-m num：匹配num行后停止读入
+-n：顺便输出行号
+-o（only-matching）：只显示匹配内容
+-r(recursive):读取目录下的所有文件
+-v：反向选择
+-w：匹配整词
+-x：整行匹配，不混杂其它
+#实例
+关键词所在行的前两行与后三行
+dmesg | grep -n -A3 -B2 --color=auto 'eth'
+显示所有包含每个字符串至少有5个连续小写字符的字符串的行
+grep ‘[a-z]\{5\}’ aa
+
+Sed：逐行内容处理
+#选项
+-i：直接修改读取的文件内容
+-n：使用安静(silent)模式，只有经过sed特殊处理的那一行才会被列出来
+-f：调用sed脚本文件
+=: 打印当前行号,行号和内容分行输出
+a：新增，字符串出现在下一行
+c：取代，字符串取代 n1,n2 之间的行！
+d：删除， 
+i：插入，字符串出现在上一行
+p：打印，通常 p 会与参数 -n一起
+s：取代
+r：将一个文本文件中的内容加到当前文件的特定位置上
+
+#高级选项
+d：删除所有
+D：删除模式空间的第一行并开始一个新的循环
+g：将hold space中的内容拷贝到pattern space中，原来pattern space里的内容清除
+G：将hold space中的内容append到pattern space\n后；当hold space为空时，效果为往pattern space添加一行空行
+h：将pattern space中的内容拷贝到hold space中，原来的hold space里的内容被清除
+H：将pattern space中的内容append到hold space\n后
+d：删除pattern中的所有行，并读入下一新行到pattern中
+D：删除multiline pattern中的第一行，不读入下一行
+n：读取下一行到pattern space。由于pattern space中有按照正常流程读取的内容，使用n命令后，pattern space中又有了一行，此时，pattern space中有2行内容；当n命令后还有其他命令的时候，此时打印出的结果是n命令读取的那一行（下一行）
+N：追加下一行内容到pattern space并在二者间嵌入一个“\n”，视作一行
+#示例
+每五行后添加一行空行
+sed 'n;n;n;n;G'
+sed '0~5G' file     
+删除偶数行
+sed 'n;d' file
+awk 'NR%2!=0{print $0}'
+保留偶数行
+sed –n “n;p” file            #保留3的倍数行 sed –n ‘n;n;p’ file
+awk ‘NR%2=0{print $0}’
+将两行合并成一行（类似paste命令）
+sed '$!N;s/\n/ /' file
+在每一行前面添加内容
+sed ‘1,$i text’| sed ‘N;s/\n//’）
+在匹配The的行前插入空行
+sed '/The/{x;p;x}' file
+awk '{if (/The/) printf("\n%s\n",$0); else print $0}' file
+
+awk：依次把每一行分成数个字段来处理
+awk [-F|-f|-v] ‘BEGIN{} //{command1; command2} END{}’ file
+ [-F|-f|-v]   大参数，-F指定分隔符，-f调用脚本，-v定义变量 var=value 
+BEGIN   初始化代码块，主要是引用全局变量设置FS分隔符：BEGIN{FS=“”}
+；      多条命令使用分号分隔
+END     结尾代码块，主要是进行最终计算或输出结尾摘要信息
+NF      每一行字段数量    
+NR      每行的记录号，多文件记录递增    
+FS      BEGIN时定义分隔符
+OFS     输出字段分隔符， 默认也是空格，可以改为制表符等
+ORS     输出的记录分隔符，默认为换行符, 
+
+awk处理多个文件时，ARGIND==1指代第一个文件，ARGIND==2指代第二个……
+awk内置字符串函数：单独处理一列内容
+gsub(r，s)                   在整个$0中r用s替代r
+sub(r,s,$1)                  将$1中第一次出现的r用s替代
+gsub(r，s，$1)               在整个$1中用s替代r
+split($1，a，sep)      通过sep分隔符将$1分成序列a
+substr($1，p)        返回$1中从p位置开始的后缀部分
+substr($1，p，n)       返回$1中从p位置开始长度为n的后缀部分
+index(s,t)                   返回s字符串中第一个t的位置
+length(s)                    返回s的长度
+
