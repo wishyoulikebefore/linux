@@ -40,3 +40,13 @@ ln：创建链接
 #选项
 -s：软链接  ln -s 源地址 目标地址
 
+scp：服务器间的传递
+#选项
+-p 留原文件的修改时间，访问时间和访问权限。
+-q 不显示传输进度条。
+-r 递归复制整个目录
+#示例
+从本地复制到远处
+scp -r local_folder remote_username@remote_ip:remote_folder
+从远处复制到本地
+scp -r remote_username@remote_ip:remote_folder local_folder
