@@ -81,3 +81,15 @@ file：file是命令文件的名字,表示将file做为crontab的任务列表文
 #第5列星期0～7（0和7表示星期天）
 #第6列要运行的命令
 ”
+
+针对进程进行的操作
+监控某一进程:pidof
+当前shell进程的PID：$$
+上一个后台进程的PID：$! 
+myCommand && pid=$!
+myCommand & echo $! >/path/to/pid.file
+查看指定进程是否存在
+if ps -p $PID > /dev/null
+then
+   echo "$PID is running"
+fi
