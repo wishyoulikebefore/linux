@@ -1,0 +1,16 @@
+命令：
+1）可执行程序
+2）shell内置命令
+3）shell函数
+4）alias命令
+
+type：显示命令的类型
+
+which：显示可执行程序的位置
+
+help：帮助文档
+
+whatis：显示命令的简要描述
+
+info：显示程序的info条目
+
