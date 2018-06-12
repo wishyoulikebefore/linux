@@ -50,3 +50,9 @@ scp：服务器间的传递
 scp -r local_folder remote_username@remote_ip:remote_folder
 从远处复制到本地
 scp -r remote_username@remote_ip:remote_folder local_folder
+
+rsync：数据镜像备份
+保存整个目录树和文件系统；保持原来文件的权限、时间和软硬链接；无需特殊权限
+在第二次及之后的传输中，只传输修改过的文件
+#示例
+rsync -hltr 
