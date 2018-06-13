@@ -1,4 +1,11 @@
+（1）apt-get
+（2）源程序
 执行“./configure”配置命令为编译做好准备；
 执行“make”命令进行软件编译；
 执行“makeinstall”完成安装；
 执行“makeclean”删除安装时产生的临时文件。
+
+添加路径
+在~/.bashrc或者/etc/profile中添加
+export PATH="/opt/STM/STLinux-2.3/devkit/sh4/bin:$PATH"
+然后source
