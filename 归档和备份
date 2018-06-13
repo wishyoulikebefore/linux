@@ -1,0 +1,11 @@
+解压缩
+对于.tar结尾的文件: tar -xvf all.tar
+对于.gz结尾的文件: gzip -d all.gz
+对于.tgz或.tar.gz结尾的文件: tar -xzvf all.tar.gz
+对于.tar.bz2结尾的文件：tar -xjvf all.tar.bz2
+
+rsync：数据镜像备份
+保存整个目录树和文件系统；保持原来文件的权限、时间和软硬链接；无需特殊权限
+在第二次及之后的传输中，只传输修改过的文件
+#示例
+rsync -hltr 
