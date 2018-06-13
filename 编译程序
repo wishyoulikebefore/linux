@@ -1,0 +1,4 @@
+执行“./configure”配置命令为编译做好准备；
+执行“make”命令进行软件编译；
+执行“makeinstall”完成安装；
+执行“makeclean”删除安装时产生的临时文件。
