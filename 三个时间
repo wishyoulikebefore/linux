@@ -1,0 +1,15 @@
+访问时间（accesstime，atime）
+读取一次文件的内容，该时间便会更新。比如使用less命令或者more命令（ls、stat这样的命令不会修改文件访问时间）。
+ls –lu命令
+
+修改时间（modifytime，mtime）
+对文件内容修改一次便会更新该时间。例如使用vim等更改文件内容并保存后 。通常伴随atime和ctime的改变
+ls –l 命令
+
+改变时间（changetime，ctime）
+更改文件的属性便会更新该时间，比如使用chmod命令更改文件属性，或者执行其他命令时隐式的附带更改了文件的属性如文件大小等。
+
+复制文件:会同时改变三个时间
+
+下载文件: 默认以远端服务器的时间戳为准，wget使用--no-use-server-timestamps使下载文件以本地服务器为准
+	       mtime和ctime一致，以完成时为准；atime以下载开始时为准
