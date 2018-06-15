@@ -45,4 +45,9 @@ while [ condition ];do
 
 done
 -----------------------------
+for型
+for ;do ;done
+#for i in {A..D}; do echo $i; done
+或者 for (( expression1; expression2 ));do ;done
+#for (( i=0;i<5;i+=1 )); do echo $i; done
 
