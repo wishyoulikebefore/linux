@@ -1,0 +1,11 @@
+建立新用户并设置密码
+新建账号：adduser zty  基于perl脚本，系统会提示你输入各种信息
+设置密码：passwd zty
+删除账号：userdel zty
+
+用户信息传递
+who：目前登入用户
+lastlog：每个账户最近登入时间
+write：传递信息
+mesg n：不接受任何信息
+wall：对所有系统上面的用户传送简讯
