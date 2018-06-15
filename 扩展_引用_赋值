@@ -63,8 +63,10 @@ Su Mo Tu We Th Fr Sa
 #示例
 d=$((ls -l))
 mv $filename ${filename}1
-$$:Shell本身的PID（ProcessID） 
-$!:Shell最后运行的后台Process的PID 
+---------------------------
+位置参数
+$$:Shell本身的PID（ProcessID） 
+$!:Shell最后运行的后台Process的PID 
 $?:最后运行的命令的结束代码（返回值）  
 $*:所有参数列表。如"$*"用「"」括起来的情况、以"$1 $2 … $n"的形式输出所有参数。 
 $@:所有参数列表。如"$@"用「"」括起来的情况、以"$1" "$2" … "$n" 的形式输出所有参数。 
