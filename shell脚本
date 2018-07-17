@@ -69,4 +69,23 @@ for ;do ;done
 #for i in {A..D}; do echo $i; done
 或者 for (( expression1; expression2 ));do ;done
 #for (( i=0;i<5;i+=1 )); do echo $i; done
+-----------------------------
+case型
+while [[ $# -gt 1 ]]
+do
+key="$1"
+
+case $key in
+     -q|--queue)
+         partition="$2"
+         shift
+         ;;
+     -p|--partition)
+         partition="$2"
+         shift
+         ;;
+     *)
+esac
+shift
+done
 
