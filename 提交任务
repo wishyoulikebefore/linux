@@ -1,0 +1,10 @@
+qsub
+#参数
+-q wc_queue_list：绑定进程号
+-cwd：使用当前工作目录
+-o path_list：指定输出流
+-e path_list：指定错误流
+-l resource_list：设置资源要求
+mem 任务的所有进程能够分配到的最大物理内存数 -l mem=100mb
+ncpus 请求的 cpu数 -l ncpus=5
+
