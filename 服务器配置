@@ -1,0 +1,54 @@
+服务器型号
+dmidecode|grep "System Information" -A9|egrep  "Manufacturer|Product"
+-------------------------------------------------------------------
+        Manufacturer: Alibaba Cloud
+        Product Name: Alibaba Cloud ECS
+-------------------------------------------------------------------
+
+操作系统信息
+cat /etc/redhat-release
+-------------------------------------------------------------------
+CentOS Linux release 7.4.1708 (Core)
+-------------------------------------------------------------------
+
+CPU统计信息
+lscpu
+-------------------------------------------------------------------
+Architecture:          x86_64
+CPU op-mode(s):        32-bit, 64-bit
+Byte Order:            Little Endian
+CPU(s):                16
+-------------------------------------------------------------------
+
+CPU型号
+cat /proc/cpuinfo | grep name | cut -f2 -d: | uniq -c
+-------------------------------------------------------------------
+16  Intel(R) Xeon(R) Platinum 8163 CPU @ 2.50GHz
+-------------------------------------------------------------------
+
+内存
+free -g
+-------------------------------------------------------------------
+              total        used        free      shared  buff/cache   available
+Mem:             31           0          30           0           0          30
+Swap:             0           0           0
+-------------------------------------------------------------------
+
+查看硬盘和分区的详细信息
+fdisk -l
+-------------------------------------------------------------------
+Disk /dev/vda: 42.9 GB, 42949672960 bytes, 83886080 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disk label type: dos
+Disk identifier: 0x0008d73a
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/vda1   *        2048    83884031    41940992   83  Linux
+
+Disk /dev/vdb: 1099.5 GB, 1099511627776 bytes, 2147483648 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+-------------------------------------------------------------------
