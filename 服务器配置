@@ -52,3 +52,11 @@ Units = sectors of 1 * 512 = 512 bytes
 Sector size (logical/physical): 512 bytes / 512 bytes
 I/O size (minimum/optimal): 512 bytes / 512 bytes
 -------------------------------------------------------------------
+
+挂载硬盘
+sudo fdisk -ls           #查看硬盘信息
+mkdir /root/mnt          #创建挂载目录
+sudo mkfs.ext3 /dev/vdb  #硬盘格式化
+mount /dev/vdb mnt       #挂载硬盘
+vim /etc/fstab           #将分区信息写到/etc/fstab文件中让它永久挂载（/dev/vdb  /root/mnt ext3 defaults  0  0）
+reboot
