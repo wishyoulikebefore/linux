@@ -23,7 +23,7 @@ TruSeq3PE=/home/zuotianyu/database/reference/TruSeq3-PE-2.fa
 cutadapt=/ehpcdata/sge_software/anaconda2/bin/cutadapt
 mixcr=/glusterfs/home/tao_jingfen/software/mixcr-2.1.10/mixcr
 
-echo $(date) ${sample_id} MiXCR processing started...
+echo `date +%Y-%m-%d-%H-%M-%S` ${sample_id} MiXCR processing started...
 
 ###fastqc
 mkdir -p ${Result_path}/fastqc/${sample_id}
@@ -46,25 +46,25 @@ $cutadapt -q 20 -o ${Result_path}/cutadapt_reads/${sample_id}/${sample_id}_combi
 ###align
 mkdir -p ${Result_path}/align_result/${sample_id}
 $mixcr align --library imgt -s ${Sample_species} -r ${Result_path}/align_result/${sample_id}/alignmentReport.txt -c ${Sample_chain} -a -g -OjParameters.parameters.floatingRightBound=false -OvParameters.geneFeatureToAlign=VTranscript -OdParameters.geneFeatureToAlign=DRegion -OjParameters.geneFeatureToAlign=JRegion --not-aligned-R1 ${Result_path}/align_result/${sample_id}/not_aligned_R1.fastq --not-aligned-R2 ${Result_path}/align_result/${sample_id}/not_aligned_R2.fastq ${Result_path}/cutadapt_reads/${sample_id}/${sample_id}_combined_cut_R1.fastq.gz ${Result_path}/cutadapt_reads/${sample_id}/${sample_id}_combined_cut_R2.fastq.gz ${Result_path}/align_result/${sample_id}/alignments.vdjca
-echo $(date) The align has been done!
+echo `date +%Y-%m-%d-%H-%M-%S` The align has been done!
 
 ###assemble
 mkdir -p ${Result_path}/assemble_result/${sample_id}
 $mixcr assemble -r ${Result_path}/assemble_result/${sample_id}/assembleReport.txt -t 8 -OassemblingFeatures=CDR3 -OqualityAggregationType=Average -OaddReadsCountOnClustering=true --index ${Result_path}/assemble_result/${sample_id}/index_file ${Result_path}/align_result/${sample_id}/alignments.vdjca ${Result_path}/assemble_result/${sample_id}/clone.clns
-echo $(date) The assemble has been done!
+echo `date +%Y-%m-%d-%H-%M-%S` The assemble has been done!
 
 ###exportAlign
 $mixcr exportAlignments -readID -vHits -vGene -dHits -dGene -jHits -jGene -cloneId ${Result_path}/assemble_result/${sample_id}/index_file ${Result_path}/align_result/${sample_id}/alignments.vdjca ${Result_path}/align_result/${sample_id}/alignmentsGene.txt
 $mixcr exportAlignments -readID -Sequence -quality -nFeature FR1 -nFeature CDR1 -nFeature FR2 -nFeature CDR2 -nFeature FR3 -nFeature CDR3 -nFeature FR4 -aaFeature FR1 -aaFeature CDR1 -aaFeature FR2 -aaFeature CDR2 -aaFeature FR3 -aaFeature CDR3 -aaFeatureFR4 ${Result_path}/align_result/${sample_id}/alignments.vdjca ${Result_path}/align_result/${sample_id}/alignmentsSequence.txt
 $mixcr exportAlignments -cloneId ${Result_path}/assemble_result/${sample_id}/index_file -descrR1 -descrR2 ${Result_path}/align_result/${sample_id}/alignments.vdjca ${Result_path}/align_result/${sample_id}/alignmentsDescr.txt
-echo $(date) exportAlign has been done !
+echo `date +%Y-%m-%d-%H-%M-%S` exportAlign has been done !
 
 ###exportAssemble
 $mixcr exportClones -o -t -cloneId -count -fraction -vHit -dHit -jHit -nFeature CDR3 -aaFeature CDR3 -readIds ${Result_path}/assemble_result/${sample_id}/index_file ${Result_path}/assemble_result/${sample_id}/clone.clns ${Result_path}/assemble_result/${sample_id}/clone.txt
 $mixcr exportClones -o -t ${Result_path}/assemble_result/${sample_id}/clone.clns ${Result_path}/assemble_result/${sample_id}/${sample_id}.txt
-echo $(date) exportAssemble has been done !
+echo `date +%Y-%m-%d-%H-%M-%S` exportAssemble has been done !
 
-echo $(date) ${sample_id} MiXCR processing ended...
+echo `date +%Y-%m-%d-%H-%M-%S` ${sample_id} MiXCR processing ended...
 " > /ehpcdata/zuotianyu/cloneTech/${sample_id}.sh
         sbatch --out=${Result_path}/log/${sample_id}.out --${Result_path}/log/${sample_id}.err /ehpcdata/zuotianyu/cloneTech/${sample_id}.sh
         sleep 3s
