@@ -1,8 +1,6 @@
 #!/bin/bash
-#usage： bash .sh project_info
 
-project_info = $1
-echo -e "Project_info: \n `sed "/#/d" ${project_info}` "
+project_info=$1
 
 ###Project_info
 Project_name=`cat ${project_info} | grep "^Project_name=" | cut -f 2 -d "="`
@@ -10,12 +8,11 @@ Sample_species=`cat ${project_info} | grep "^Sample_species=" | cut -f 2 -d "="`
 Sample_source=`cat ${project_info} | grep "^Sample_source=" | cut -f 2 -d "="`
 Sample_chain=`cat ${project_info} | grep "^Sample_chain" | cut -f 2 -d "="`
 Sample_path=`cat ${project_info} | grep "^Sample_path" | cut -f 2 -d "="`
-Result_path=/ehpcdata/zuotianyu/cloneTech/${Sample_source}/${Project_name}
+Result_path=/ehpcdata/zuotianyu/clonetech/${Sample_source}/${Project_name}
 
 for sample_id in `ls -l ${Sample_path} | awk '/^d/ {print $NF}' | cut -d '_' -f 2`;do
-
-        echo "#!/usr/bin/bash
-
+        
+	echo "#!/usr/bin/bash
 ###software
 fastqc=/ehpcdata/sge_software/anaconda2/bin/fastqc
 trimmomatic=/ehpcdata/sge_software/anaconda2/bin/trimmomatic
@@ -65,8 +62,8 @@ $mixcr exportClones -o -t ${Result_path}/assemble_result/${sample_id}/clone.clns
 echo `date +%Y-%m-%d-%H-%M-%S` exportAssemble has been done !
 
 echo `date +%Y-%m-%d-%H-%M-%S` ${sample_id} MiXCR processing ended...
-" > /ehpcdata/zuotianyu/cloneTech/${sample_id}.sh
-        sbatch --out=${Result_path}/log/${sample_id}.out --${Result_path}/log/${sample_id}.err /ehpcdata/zuotianyu/cloneTech/${sample_id}.sh
+" > /ehpcdata/zuotianyu/clonetech/${sample_id}.sh
+        sbatch --output=${Result_path}/log/${sample_id}.out --error=${Result_path}/log/${sample_id}.err /ehpcdata/zuotianyu/clonetech/${sample_id}.sh
         sleep 3s
 
 done;
