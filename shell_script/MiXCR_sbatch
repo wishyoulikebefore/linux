@@ -12,7 +12,7 @@ Result_path=/ehpcdata/zuotianyu/clonetech/${Sample_source}/${Project_name}
 
 for sample_id in `ls -l ${Sample_path} | awk '/^d/ {print $NF}' | cut -d '_' -f 2`;do
         
-	echo "#!/usr/bin/bash
+	echo '#!/usr/bin/bash
 ###software
 fastqc=/ehpcdata/sge_software/anaconda2/bin/fastqc
 trimmomatic=/ehpcdata/sge_software/anaconda2/bin/trimmomatic
@@ -62,7 +62,7 @@ $mixcr exportClones -o -t ${Result_path}/assemble_result/${sample_id}/clone.clns
 echo `date +%Y-%m-%d-%H-%M-%S` exportAssemble has been done !
 
 echo `date +%Y-%m-%d-%H-%M-%S` ${sample_id} MiXCR processing ended...
-" > /ehpcdata/zuotianyu/clonetech/${sample_id}.sh
+' > /ehpcdata/zuotianyu/clonetech/${sample_id}.sh
         sbatch --output=${Result_path}/log/${sample_id}.out --error=${Result_path}/log/${sample_id}.err /ehpcdata/zuotianyu/clonetech/${sample_id}.sh
         sleep 3s
 
