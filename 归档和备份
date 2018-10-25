@@ -1,8 +1,10 @@
 解压缩
+对于.zip结尾的文件：unzip all.zip
 对于.tar结尾的文件: tar -xvf all.tar
-对于.gz结尾的文件: gzip -d all.gz
+对于.gz结尾的文件: gzip -d all.gz (或者使用gunzip)
 对于.tgz或.tar.gz结尾的文件: tar -xzvf all.tar.gz
 对于.tar.bz2结尾的文件：tar -xjvf all.tar.bz2
+对于.bz2结尾的文件：bunzip2 all.bz2（bz2文件是牺牲速度以换取高质量的数据压缩）
 
 rsync：数据镜像备份
 保存整个目录树和文件系统；保持原来文件的权限、时间和软硬链接；无需特殊权限
