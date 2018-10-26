@@ -12,7 +12,7 @@ Result_path=/ehpcdata/zuotianyu/clonetech/${Sample_source}/${Project_name}
 
 ###software
 fastqc=/ehpcdata/sge_software/anaconda2/bin/fastqc
-trimmomatic=/ehpcdata/sge_software/anaconda2/bin/trimmomatic
+trimmomatic=/ehpcdata/sge_software/Trimmomatic/Trimmomatic-0.36/trimmomatic-0.36.jar
 TruSeq3PE=/home/zuotianyu/database/reference/TruSeq3-PE-2.fa
 cutadapt=/ehpcdata/sge_software/anaconda2/bin/cutadapt
 mixcr=/home/zuotianyu/software/mixcr-2.1.12/mixcr
@@ -37,16 +37,16 @@ ${fastqc} -o ${Result_path}/fastqc/${sample_id} ${Sample_path}/Sample_${sample_i
 
 ###trim adaptor
 mkdir -p ${Result_path}/trim_data/${sample_id}
-${trimmomatic} PE -phred33 -threads 2 -trimlog ${Result_path}/trim_data/${sample_id}_trim.log \
+java -jar ${trimmomatic} PE -phred33 -threads 2 -trimlog ${Result_path}/trim_data/${sample_id}_trim.log \
 ${Sample_path}/Sample_${sample_id}/${sample_id}_combined_R1.fastq.gz ${Sample_path}/Sample_${sample_id}/${sample_id}_combined_R2.fastq.gz \
-${Result_path}/trim_data/Sample_${sample_id}/${sample_id}_combined_R1.trim.fastq.gz ${Result_path}/trim_data/Sample_${sample_id}/${sample_id}_combined_R1.trim.unpaired.fastq.gz \
-${Result_path}/trim_data/Sample_${sample_id}/${sample_id}_combined_R2.trim.fastq.gz ${Result_path}/trim_data/Sample_${sample_id}/${sample_id}_combined_R2.trim.unpaired.fastq.gz \
-ILLUMINACLIP:${TruSeq3PE}:2:30:10:6:true MINLEN:75 > ${Result_path}/trim_data/Sample_${sample_id}/${sample_id}_adapter.stat 2>&1
+${Result_path}/trim_data/${sample_id}/${sample_id}_combined_R1.trim.fastq.gz ${Result_path}/trim_data/${sample_id}/${sample_id}_combined_R1.trim.unpaired.fastq.gz \
+${Result_path}/trim_data/${sample_id}/${sample_id}_combined_R2.trim.fastq.gz ${Result_path}/trim_data/${sample_id}/${sample_id}_combined_R2.trim.unpaired.fastq.gz \
+ILLUMINACLIP:${TruSeq3PE}:2:30:10:6:true MINLEN:75 > ${Result_path}/trim_data/${sample_id}/${sample_id}_adapter.stat 2>&1
 
 ###cutadapt
 mkdir -p ${Result_path}/cutadapt_reads/${sample_id}
-${cutadapt} -q 20 -o ${Result_path}/cutadapt_reads/${sample_id}/${sample_id}_combined_cut_R1.fastq.gz ${Result_path}/trim_data/Sample_${sample_id}/${sample_id}_combined_R1.trim.fastq.gz
-${cutadapt} -q 20 -o ${Result_path}/cutadapt_reads/${sample_id}/${sample_id}_combined_cut_R2.fastq.gz ${Result_path}/trim_data/Sample_${sample_id}/${sample_id}_combined_R2.trim.fastq.gz
+${cutadapt} -q 20 -o ${Result_path}/cutadapt_reads/${sample_id}/${sample_id}_combined_cut_R1.fastq.gz ${Result_path}/trim_data/${sample_id}/${sample_id}_combined_R1.trim.fastq.gz
+${cutadapt} -q 20 -o ${Result_path}/cutadapt_reads/${sample_id}/${sample_id}_combined_cut_R2.fastq.gz ${Result_path}/trim_data/${sample_id}/${sample_id}_combined_R2.trim.fastq.gz
 
 ###align
 mkdir -p ${Result_path}/align_result/${sample_id}
