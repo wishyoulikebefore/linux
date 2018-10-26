@@ -1,4 +1,4 @@
-qsub
+qsub：sge集群
 #参数
 -q wc_queue_list：绑定进程号
 -cwd：使用当前工作目录
@@ -8,3 +8,10 @@ qsub
 mem 任务的所有进程能够分配到的最大物理内存数 -l mem=100mb
 ncpus 请求的 cpu数 -l ncpus=5
 
+sbatch：slurm集群
+#参数
+-c ncpus：任务使用cpu数
+-o path_list：指定输出流
+-e path_list：指定错误流
+-D ：指定工作目录
+-I：绑定进程号
