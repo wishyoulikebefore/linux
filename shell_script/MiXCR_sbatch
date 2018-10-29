@@ -50,7 +50,7 @@ ${cutadapt} -q 20 -o ${Result_path}/cutadapt_reads/${sample_id}/${sample_id}_com
 
 ###align
 mkdir -p ${Result_path}/align_result/${sample_id}
-${mixcr} align --library imgt -s ${Sample_species} -r ${Result_path}/align_result/${sample_id}/alignmentReport.txt -c ${Sample_chain} -a -g -OjParameters.parameters.floatingRightBound=false -OvParameters.geneFeatureToAlign=VTranscript -OdParameters.geneFeatureToAlign=DRegion -OjParameters.geneFeatureToAlign=JRegion --not-aligned-R1 ${Result_path}/align_result/${sample_id}/not_aligned_R1.fastq --not-aligned-R2 ${Result_path}/align_result/${sample_id}/not_aligned_R2.fastq ${Result_path}/cutadapt_reads/${sample_id}/${sample_id}_combined_cut_R1.fastq.gz ${Result_path}/cutadapt_reads/${sample_id}/${sample_id}_combined_cut_R2.fastq.gz ${Result_path}/align_result/${sample_id}/alignments.vdjca
+${mixcr} align -f -b imgt -s ${Sample_species} -r ${Result_path}/align_result/${sample_id}/alignmentReport.txt -c ${Sample_chain} -a -g -OvParameters.geneFeatureToAlign=VTranscript -OdParameters.geneFeatureToAlign=DRegion -OjParameters.geneFeatureToAlign=JRegion --not-aligned-R1 ${Result_path}/align_result/${sample_id}/not_aligned_R1.fastq --not-aligned-R2 ${Result_path}/align_result/${sample_id}/not_aligned_R2.fastq ${Result_path}/cutadapt_reads/${sample_id}/${sample_id}_combined_cut_R1.fastq.gz ${Result_path}/cutadapt_reads/${sample_id}/${sample_id}_combined_cut_R2.fastq.gz ${Result_path}/align_result/${sample_id}/alignments.vdjca
 echo `date +%Y-%m-%d-%H-%M-%S` The align has been done!
 
 ###assemble
