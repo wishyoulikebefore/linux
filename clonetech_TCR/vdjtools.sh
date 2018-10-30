@@ -101,4 +101,4 @@ java -jar -Xmx20G $vdjtools ScanDatabase -m ${convert_dir}/metadata.txt 6_Annota
 
 
 echo "Job has been done!"
-echo 'date +%Y-%m-%d-%H-%M-%S'
+echo `date +%Y-%m-%d-%H-%M-%S`
