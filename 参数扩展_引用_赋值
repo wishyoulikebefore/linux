@@ -23,12 +23,10 @@ ${parameter:?word}
 echo ~
 echo ~foo
 
-3）算术扩展
-#示例
-echo $((2+2))
+3）算术扩展：$((expression))
 echo $(((5**2)*3))
 
-花括号扩展：创建多种文本字符串，用于创建一系列的文件或者目录
+4）花括号扩展：创建多种文本字符串，用于创建一系列的文件或者目录
 #示例
 echo Front-{A,B,C}-Back
 Front-A-Back Front-B-Back Front-C-Back
@@ -36,14 +34,6 @@ echo Number_{1..5}
 Number_1 Number_2 Number_3 Number_4 Number_5
 echo a{A{1,2},B{3,4}}b
 aA1b aA2b aB3b aB4b
-
-参数扩展
-#示例
-echo $USER
-
-命令替换：把一个命令的输出作为一个扩展模式使用
-#示例
-echo $(ls)
 
 引用
 双引号：将文本放入双引号，除“$”,"\","'"外，所有特殊字符都会失去意义，即单词分割、路径名扩展、波浪线扩展和花括号扩展都讲失效
