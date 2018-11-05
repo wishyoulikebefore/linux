@@ -37,44 +37,44 @@ for sample_id  in `ls -l ${mixcr_data}/assemble_result | awk '/^d/ {print $NF}'`
         echo ${sample_id}
 
 ###Basic analysis,Generate summary tables
-        java -jar -Xmx20G $vdjtools PlotFancySpectratype ${convert_dir}/${sample_id}.txt 1_Basic/4/${sample_id}
-        java -jar -Xmx20G $vdjtools PlotSpectratypeV ${convert_dir}/${sample_id}.txt 1_Basic/5.1/${sample_id}
-        java -jar -Xmx20G $vdjtools PlotSpectratypeV -u ${convert_dir}/${sample_id}.txt 1_Basic/5.2/${sample_id}
-        java -jar -Xmx20G $vdjtools PlotFancyVJUsage ${convert_dir}/${sample_id}.txt 1_Basic/6.1/${sample_id}
-        java -jar -Xmx20G $vdjtools PlotFancyVJUsage -u ${convert_dir}/${sample_id}.txt 1_Basic/6.2/${sample_id}
+        java -jar -Xmx20G $vdjtools PlotFancySpectratype ${convert_dir}/${sample_id}.txt 1_Basic/PlotFancySpectratype/${sample_id}
+        java -jar -Xmx20G $vdjtools PlotSpectratypeV ${convert_dir}/${sample_id}.txt 1_Basic/PlotSpectratypeV/${sample_id}
+        java -jar -Xmx20G $vdjtools PlotSpectratypeV -u ${convert_dir}/${sample_id}.txt 1_Basic/PlotSpectratypeV_unweighted/${sample_id}
+        java -jar -Xmx20G $vdjtools PlotFancyVJUsage ${convert_dir}/${sample_id}.txt 1_Basic/PlotFancyVJUsage/${sample_id}
+        java -jar -Xmx20G $vdjtools PlotFancyVJUsage -u ${convert_dir}/${sample_id}.txt 1_Basic/PlotFancyVJUsage_unweighted/${sample_id}
 
 ### Diversity estimation
-        java -jar -Xmx20G $vdjtools PlotQuantileStats ${convert_dir}/${sample_id}.txt 2_Diversity/7/${sample_id}
+        java -jar -Xmx20G $vdjtools PlotQuantileStats ${convert_dir}/${sample_id}.txt 2_Diversity/PlotQuantileStats/${sample_id}
 done;
 
 ###Basic analysis,Generate summary tables
-java -jar -Xmx20G $vdjtools CalcBasicStats -m ${convert_dir}/metadata.txt 1_Basic/1.1
-java -jar -Xmx20G $vdjtools CalcBasicStats -u -m ${convert_dir}/metadata.txt 1_Basic/1.2
-java -jar -Xmx20G $vdjtools CalcSegmentUsage -p -m ${convert_dir}/metadata.txt 1_Basic/2.1
-java -jar -Xmx20G $vdjtools CalcSegmentUsage -u -p -m ${convert_dir}/metadata.txt 1_Basic/2.2
-java -jar -Xmx20G $vdjtools CalcSegmentUsage -f cell -p -m ${convert_dir}/metadata.txt 1_Basic/2.3
-java -jar -Xmx20G $vdjtools CalcSegmentUsage -l cell -p -m ${convert_dir}/metadata.txt 1_Basic/2.4
-java -jar -Xmx20G $vdjtools CalcSpectratype -m ${convert_dir}/metadata.txt 1_Basic/3.1
-java -jar -Xmx20G $vdjtools CalcSpectratype -u -m ${convert_dir}/metadata.txt 1_Basic/3.2
-java -jar -Xmx20G $vdjtools CalcSpectratype -a -m ${convert_dir}/metadata.txt 1_Basic/3.3               #-a使用CDR3氨基酸序列而非碱基序列
+java -jar -Xmx20G $vdjtools CalcBasicStats -m ${convert_dir}/metadata.txt 1_Basic/CalcBasicStats/
+java -jar -Xmx20G $vdjtools CalcBasicStats -u -m ${convert_dir}/metadata.txt 1_Basic/CalcBasicStats_unweighted/
+java -jar -Xmx20G $vdjtools CalcSegmentUsage -p -m ${convert_dir}/metadata.txt 1_Basic/CalcSegmentUsage/
+java -jar -Xmx20G $vdjtools CalcSegmentUsage -u -p -m ${convert_dir}/metadata.txt 1_Basic/CalcSegmentUsage_unweighted/
+java -jar -Xmx20G $vdjtools CalcSegmentUsage -f cell -p -m ${convert_dir}/metadata.txt 1_Basic/CalcSegmentUsage/
+java -jar -Xmx20G $vdjtools CalcSegmentUsage -l cell -p -m ${convert_dir}/metadata.txt 1_Basic/CalcSegmentUsage_2/
+java -jar -Xmx20G $vdjtools CalcSpectratype -m ${convert_dir}/metadata.txt 1_Basic/CalcSpectratype/
+java -jar -Xmx20G $vdjtools CalcSpectratype -u -m ${convert_dir}/metadata.txt 1_Basic/CalcSpectratype_unweighted/
+java -jar -Xmx20G $vdjtools CalcSpectratype -a -m ${convert_dir}/metadata.txt 1_Basic/CalcSpectratype_aa/               #-a使用CDR3氨基酸序列而非碱基序列
 
 ### Diversity estimation
-java -jar -Xmx20G $vdjtools RarefactionPlot -m ${convert_dir}/metadata.txt -l sample_id -f cell 2_Diversity/8.1
-java -jar -Xmx20G $vdjtools RarefactionPlot -m ${convert_dir}/metadata.txt -f sample_id -l cell 2_Diversity/8.2
-java -jar -Xmx20G $vdjtools CalcDiversityStats -m ${convert_dir}/metadata.txt 2_Diversity/9
+java -jar -Xmx20G $vdjtools RarefactionPlot -m ${convert_dir}/metadata.txt -l sample_id -f cell 2_Diversity/RarefactionPlot/
+java -jar -Xmx20G $vdjtools RarefactionPlot -m ${convert_dir}/metadata.txt -f sample_id -l cell 2_Diversity/RarefactionPlot_2/
+java -jar -Xmx20G $vdjtools CalcDiversityStats -m ${convert_dir}/metadata.txt 2_Diversity/CalcDiversityStats/
 
 
 # Sample overlapping   这个地方需要改写（配对分析）
 #java -jar -Xmx20G $vdjtools OverlapPair -p ${clone_data}/174-i5a.txt ${clone_data}/175-i5a.txt 3_Overlap/10.174-175-i5a
-java -jar -Xmx20G $vdjtools CalcPairwiseDistances -m ${convert_dir}/metadata.txt 3_Overlap/11
-java -jar -Xmx20G $vdjtools ClusterSamples -p -f cell -l sample_id 3_Overlap/11 3_Overlap/12.1
-java -jar -Xmx20G $vdjtools ClusterSamples -f cell -l sample_id 3_Overlap/11 3_Overlap/12.1
-java -jar -Xmx20G $vdjtools ClusterSamples -p -e -f cell -l sample_id 3_Overlap/11 3_Overlap/12.2
-java -jar -Xmx20G $vdjtools ClusterSamples -p -l cell -f sample_id 3_Overlap/11 3_Overlap/12.3
-java -jar -Xmx20G $vdjtools TestClusters 3_Overlap/12.1 3_Overlap/13.1
-java -jar -Xmx20G $vdjtools TestClusters -e 3_Overlap/12.1 3_Overlap/13.2/
-java -jar -Xmx20G $vdjtools TrackClonotypes -p -m ${convert_dir}/metadata.txt 3_Overlap/14.1
-java -jar -Xmx20G $vdjtools TrackClonotypes -f cell -p -m ${convert_dir}/metadata.txt 3_Overlap/14.1
+java -jar -Xmx20G $vdjtools CalcPairwiseDistances -m ${convert_dir}/metadata.txt 3_Overlap/CalcPairwiseDistances/
+java -jar -Xmx20G $vdjtools ClusterSamples -p -f cell -l sample_id 3_Overlap/11 3_Overlap/ClusterSamples/
+java -jar -Xmx20G $vdjtools ClusterSamples -f cell -l sample_id 3_Overlap/11 3_Overlap/ClusterSamples_2/
+java -jar -Xmx20G $vdjtools ClusterSamples -p -e -f cell -l sample_id 3_Overlap/11 3_Overlap/ClusterSamples_3/
+java -jar -Xmx20G $vdjtools ClusterSamples -p -l cell -f sample_id 3_Overlap/11 3_Overlap/ClusterSamples_4/
+java -jar -Xmx20G $vdjtools TestClusters 3_Overlap/12.1 3_Overlap/TestClusters/
+java -jar -Xmx20G $vdjtools TestClusters -e 3_Overlap/12.1 3_Overlap/TestClusters_2/
+java -jar -Xmx20G $vdjtools TrackClonotypes -p -m ${convert_dir}/metadata.txt 3_Overlap/TrackClonotypes/
+java -jar -Xmx20G $vdjtools TrackClonotypes -f cell -p -m ${convert_dir}/metadata.txt 3_Overlap/TrackClonotypes_2/
 
 
 # Pre-processing
@@ -89,16 +89,16 @@ java -jar -Xmx20G $vdjtools FilterBySegment -v v1 -m ${convert_dir}/metadata.txt
 
 
 ###Operate on clonotype tables
-java -jar -Xmx20G $vdjtools JoinSamples -p -m ${convert_dir}/metadata.txt 5_OperateClonotype/23
-java -jar -Xmx20G $vdjtools PoolSamples -m ${convert_dir}/metadata.txt 5_OperateClonotype/24
+java -jar -Xmx20G $vdjtools JoinSamples -p -m ${convert_dir}/metadata.txt 5_OperateClonotype/JoinSamples/
+java -jar -Xmx20G $vdjtools PoolSamples -m ${convert_dir}/metadata.txt 5_OperateClonotype/PoolSamples/
 
 
 # Annotate each clonotype in each sample with insert size, total CDR3 hydrophobicity and other basic and amino acid properties
-java -jar -Xmx20G $vdjtools CalcDegreeStats -m ${convert_dir}/metadata.txt 6_Annotation/25
-java -jar -Xmx20G $vdjtools CalcCdrAAProfile -m ${convert_dir}/metadata.txt 6_Annotation/26
-java -jar -Xmx20G $vdjtools Annotate -m ${convert_dir}/metadata.txt 6_Annotation/27
-java -jar -Xmx20G $vdjtools ScanDatabase -m ${convert_dir}/metadata.txt 6_Annotation/28
+java -jar -Xmx20G $vdjtools CalcDegreeStats -m ${convert_dir}/metadata.txt 6_Annotation/CalcDegreeStats/
+java -jar -Xmx20G $vdjtools CalcCdrAAProfile -m ${convert_dir}/metadata.txt 6_Annotation/CalcCdrAAProfile/
+java -jar -Xmx20G $vdjtools Annotate -m ${convert_dir}/metadata.txt 6_Annotation/Annotate/
+java -jar -Xmx20G $vdjtools ScanDatabase -m ${convert_dir}/metadata.txt 6_Annotation/ScanDatabase/
 
 
-echo "Job has been done!"
-echo `date +%Y-%m-%d-%H-%M-%S`
+echo 'Job has been done!'
+echo $(date +%Y-%m-%d-%H-%M-%S)
