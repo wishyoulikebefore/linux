@@ -1,6 +1,7 @@
 #!/bin/bash
 
 project_info=$1
+wd=$2
 
 ###Project_info
 Project_name=`cat ${project_info} | grep "^Project_name=" | cut -f 2 -d "="`
@@ -8,7 +9,7 @@ Sample_species=`cat ${project_info} | grep "^Sample_species=" | cut -f 2 -d "="`
 Sample_source=`cat ${project_info} | grep "^Sample_source=" | cut -f 2 -d "="`
 Sample_chain=`cat ${project_info} | grep "^Sample_chain" | cut -f 2 -d "="`
 Sample_path=`cat ${project_info} | grep "^Sample_path" | cut -f 2 -d "="`
-Result_path=/ehpcdata/zuotianyu/clonetech/${Sample_source}/${Project_name}
+Result_path=${wd}/${Sample_source}/${Project_name}
 
 ###software
 fastqc=/ehpcdata/sge_software/anaconda2/bin/fastqc
@@ -50,7 +51,7 @@ ${cutadapt} -q 20 -o ${Result_path}/cutadapt_reads/${sample_id}/${sample_id}_com
 
 ###align
 mkdir -p ${Result_path}/align_result/${sample_id}
-${mixcr} align -f -b imgt -s ${Sample_species} -r ${Result_path}/align_result/${sample_id}/alignmentReport.txt -c ${Sample_chain} -a -g -OvParameters.geneFeatureToAlign=VTranscript -OdParameters.geneFeatureToAlign=DRegion -OjParameters.geneFeatureToAlign=JRegion --not-aligned-R1 ${Result_path}/align_result/${sample_id}/not_aligned_R1.fastq --not-aligned-R2 ${Result_path}/align_result/${sample_id}/not_aligned_R2.fastq ${Result_path}/cutadapt_reads/${sample_id}/${sample_id}_combined_cut_R1.fastq.gz ${Result_path}/cutadapt_reads/${sample_id}/${sample_id}_combined_cut_R2.fastq.gz ${Result_path}/align_result/${sample_id}/alignments.vdjca
+${mixcr} align --library imgt -s ${Sample_species} -r ${Result_path}/align_result/${sample_id}/alignmentReport.txt -c ${Sample_chain} -a -g -OjParameters.parameters.floatingRightBound=false -OvParameters.geneFeatureToAlign=VTranscript -OdParameters.geneFeatureToAlign=DRegion -OjParameters.geneFeatureToAlign=JRegion --not-aligned-R1 ${Result_path}/align_result/${sample_id}/not_aligned_R1.fastq --not-aligned-R2 ${Result_path}/align_result/${sample_id}/not_aligned_R2.fastq ${Result_path}/cutadapt_reads/${sample_id}/${sample_id}_combined_cut_R1.fastq.gz ${Result_path}/cutadapt_reads/${sample_id}/${sample_id}_combined_cut_R2.fastq.gz ${Result_path}/align_result/${sample_id}/alignments.vdjca
 echo `date +%Y-%m-%d-%H-%M-%S` The align has been done!
 
 ###assemble
@@ -70,8 +71,8 @@ ${mixcr} exportClones -o -t ${Result_path}/assemble_result/${sample_id}/clone.cl
 echo `date +%Y-%m-%d-%H-%M-%S` exportAssemble has been done !
 
 echo `date +%Y-%m-%d-%H-%M-%S` ${sample_id} MiXCR processing ended...
-" > /ehpcdata/zuotianyu/clonetech/${sample_id}.sh
-        sbatch --output=${Result_path}/log/${sample_id}.out --error=${Result_path}/log/${sample_id}.err /ehpcdata/zuotianyu/clonetech/${sample_id}.sh
+" > ${wd}/${sample_id}.sh
+        sbatch --output=${Result_path}/log/${sample_id}.out --error=${Result_path}/log/${sample_id}.err ${wd}/${sample_id}.sh
         sleep 3s
 
 done;
