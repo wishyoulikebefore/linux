@@ -1,0 +1,11 @@
+Project_name=SZ_university
+##Sample_species:hsa(HomoSapiens)/mmu(MusMusculus)/rat
+Sample_species=hsa
+##Sample_source:BCR/TCR
+Sample_source=TCR
+##Sample_type:DNA/RNA
+Sample_type=RNA
+##Sample_chain=IGH/IGL/IGK/TRA/TRB/TRG/TRD,IG/TCR
+Sample_chain=TCR
+##Sample_path=/nextcode/pre_data_new/sequence/180411_M01751_0221_000000000-BMVTB_RSJCX1804110004_03_Barcode16_miseq_8_8/Project_s000
+Sample_path=/ehpcdata/zuotianyu/ext_storage_oss/3par_sequence/Project_s1218r04006
