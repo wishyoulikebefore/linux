@@ -13,4 +13,9 @@ CCCCCCCCCTTTCCCCTTCTTTTTCTCCTCTTCCCCCCTCTTTCCCTCTTTTCCCTCCTCCCTCTCCTTTTCTCT
 300bp
 
 printf：格式化并打印数据（不能用于管道传输）
-#printf "I formatted the string: %s\n" foo
+----------------------------------------------------------------------------
+printf "I formatted the string: %s\n" ${var}
+区别于
+printf "I formatted the string: %s\n" "${var}"
+比如${var}带()时
+----------------------------------------------------------------------------
