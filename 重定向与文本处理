@@ -123,7 +123,7 @@ awk '{if (/The/) printf("\n%s\n",$0); else print $0}' file
 awk：依次把每一行分成数个字段来处理
 awk [-F|-f|-v] ‘BEGIN{} //{command1; command2} END{}’ file
  [-F|-f|-v]   大参数，-F指定分隔符，-f调用脚本，-v定义变量 var=value 
-BEGIN   初始化代码块，主要是引用全局变量设置FS分隔符：BEGIN{FS=“”}
+BEGIN   初始化代码块，主要是引用全局变量设置FS分隔符：BEGIN{FS=OFS="\t"}
 ；      多条命令使用分号分隔
 END     结尾代码块，主要是进行最终计算或输出结尾摘要信息
 NF      每一行字段数量    
