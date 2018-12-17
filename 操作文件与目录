@@ -1,4 +1,4 @@
-ls命令：查看目录内容
+ls：查看目录内容
 参数
 -a：列出所有文件，包括以点号开头的文件
 -d：与-l结合使用，可查看目录的详细信息，而非目录中的内容
@@ -10,9 +10,15 @@ ls命令：查看目录内容
 -t：按修改时间排序
 #ll -rl 查看文件生成最晚时间
 
-file命令：确定文件类型
+file：确定文件类型
 
-less命令：查看文件内容
+split：切割文件
+按照行数
+split -l 300 large_file.txt new_file_prefix
+按照大小
+split -b 10m large_file.txt new_file_prefix
+
+less：查看文件内容
 参数
 -e：当文件显示结束后，自动离开
 –p （dispaly）：在第一次出现“display”的地方开始显示
