@@ -10,11 +10,9 @@ echo "${a}_file"
 扩展
 1）空变量扩展的管理
 设置默认值：用于处理参数缺失或设置默认值
-${parameter:-word} 或者 ${parameter:=word}
---------------------------------------------
-foo=
-echo ${foo:-"substitute value if unset"}
---------------------------------------------
+${parameter:-word}：默认值为word
+${parameter:+word}：设置后为word，否则为空字符串
+
 检测：若参数未设定或为空，则退出
 ${parameter:?word}
 
