@@ -1,0 +1,7 @@
+/etc/rc.local 
+这是使用者自订开机启动程序,把需要开机自动运行的程序写在这个脚本里
+比如启动redis：/usr/local/redis/bin/redis-server /usr/local/redis/etc/redis-conf
+
+/etc/init.d  
+这个目录存放的是一些脚本，一般是linux以rpm包安装时设定的一些服务的启动脚本，执行这些脚本可以用来启动，停止，重启这些服务
+比如重启网络： /etc/init.d/networking restart
