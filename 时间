@@ -13,3 +13,7 @@ ls –l 命令
 
 下载文件: 默认以远端服务器的时间戳为准，wget使用--no-use-server-timestamps使下载文件以本地服务器为准
 	       mtime和ctime一致，以完成时为准；atime以下载开始时为准
+
+输出当前时间
+[root@root ~]# date "+%Y-%m-%d %H:%M:%S"
+2013-02-19 13:14:19
