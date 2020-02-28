@@ -3,6 +3,7 @@ tar -zcvf 打包后生成的文件名全路径 要打包的目录
 #tar -zcvf /home/xahot.tar.gz ./xahot
 zip [参数] [打包后的文件名] [打包的目录路径]
 #zip -r ./xahot.zip ./xahot
+### 如果使用绝对路径，会生成很深的目录结构
 
 解压缩
 对于.zip结尾的文件：unzip all.zip
