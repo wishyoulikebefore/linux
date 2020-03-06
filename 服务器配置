@@ -6,13 +6,9 @@ dmidecode|grep "System Information" -A9|egrep  "Manufacturer|Product"
 -------------------------------------------------------------------
 
 操作系统信息
-cat /etc/redhat-release
+lsb_release -d
 -------------------------------------------------------------------
-CentOS Linux release 7.4.1708 (Core)
--------------------------------------------------------------------
-cat /proc/version
--------------------------------------------------------------------
-Linux version 4.4.0-116-generic (buildd@lgw01-amd64-021) (gcc version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.9) ) #140-Ubuntu SMP Mon Feb 12 21:23:04 UTC 2018
+Description:    Ubuntu 16.04.4 LTS
 -------------------------------------------------------------------
 
 CPU统计信息
