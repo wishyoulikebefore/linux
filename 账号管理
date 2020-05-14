@@ -1,6 +1,6 @@
 建立新用户并设置密码
 新建账号：adduser zty  基于perl脚本，系统会提示你输入各种信息
-设置密码：passwd zty
+设置or修改密码：passwd zty
 删除账号：userdel zty
 
 用户信息传递
